@@ -1,6 +1,5 @@
 #!/bin/bash
 clear
-
 sucess_file="sucess.txt"
 
 while IFS='' read -r linha || [[ -n "$linha" ]]; do
@@ -8,11 +7,12 @@ while IFS='' read -r linha || [[ -n "$linha" ]]; do
     if [ $? -eq 0 ]; then
         response=$(nc -w2 "$linha" 80 < /dev/null 2>&1 >/dev/null)
         if [[ $response != *"HTTP/1.1 501 Not Implemented"* ]]; then
-            echo "Conexão bem-sucedida com $linha"
-            echo "$linha" >> "$sucess_file"
+            ip_porta="${linha#nc }"
+            echo "$ip_porta" >> "$sucess_file"
         fi
     fi
 done < IpsOn.txt
+
 clear
 banner='''
                       :::!~!!!!!:.
