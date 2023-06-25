@@ -42,14 +42,11 @@ print('''[*] - running''')
 comando = "nmap -sn 192.168.0.1/24"
 arquivo_saida = "ips.txt"
 
-# Executar o comando e capturar a saída
 saida = subprocess.check_output(comando, shell=True, stderr=subprocess.STDOUT, universal_newlines=True)
 
-# Extrair os IPs usando expressões regulares
 padrao_ip = r"\b(?:\d{1,3}\.){3}\d{1,3}\b"
 ips_encontrados = re.findall(padrao_ip, saida)
 
-# Armazenar os IPs no arquivo
 with open(arquivo_saida, "w") as f:
     f.write("\n".join(ips_encontrados))
 os.system('chmod +x scan.sh')
