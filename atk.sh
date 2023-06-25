@@ -28,12 +28,8 @@ while IFS='' read -r linha || [[ -n "$linha" ]]; do
     eval "$linha"
     if [ $? -eq 0 ]; then
         response=$(nc "$linha" 80 < /dev/null 2>&1)
-        if [[ $response == *"HTTP/1.1 501 Not Implemented"* ]]; then
-            echo "Conexão recusada"
-        else
+        if [[ $response != *"HTTP/1.1 501 Not Implemented"* ]]; then
             echo "Conexão bem-sucedida com $linha"
         fi
-    else
-        echo "Falha na conexão com $linha"
     fi
 done < IpsOn.txt
