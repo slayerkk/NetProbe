@@ -1,5 +1,19 @@
 #!/bin/bash
 clear
+
+sucess_file="sucess.txt"
+
+while IFS='' read -r linha || [[ -n "$linha" ]]; do
+    eval "$linha"
+    if [ $? -eq 0 ]; then
+        response=$(nc -w2 "$linha" 80 < /dev/null 2>&1 >/dev/null)
+        if [[ $response != *"HTTP/1.1 501 Not Implemented"* ]]; then
+            echo "Conexão bem-sucedida com $linha"
+            echo "$linha" >> "$sucess_file"
+        fi
+    fi
+done < IpsOn.txt
+clear
 banner='''
                       :::!~!!!!!:.
                   .xUHWH!! !!?M88WHX:.
@@ -23,13 +37,4 @@ $R@i.~~ !     :   ~$$$$$B$$en:``
 ?MXT@Wx.~    :     ~"##*$$$$M~ '''
 echo "$banner" | lolcat -p
 
-while IFS='' read -r linha || [[ -n "$linha" ]]; do
-    eval "$linha"
-    if [ $? -eq 0 ]; then
-        response=$(nc -w2 "$linha" 80 < /dev/null 2>&1 >/dev/null)
-        if [[ $response != *"HTTP/1.1 501 Not Implemented"* ]]; then
-            echo "Conexão bem-sucedida com $linha"
-        fi
-    fi
-done < IpsOn.txt 2>> ignore.txt
-
+cat sucess.txt
