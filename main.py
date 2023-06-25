@@ -12,8 +12,6 @@ azul = "\033[34m"
 magenta = "\033[35m"
 ciano = "\033[36m"
 branco = "\033[37m"
-
-os.system('cls')
 print(f'''
                     {vermelho}.xU::::!~!!!!!:.
                   {vermelho}.xUHWH!! !!?M88WHX:.

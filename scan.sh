@@ -52,3 +52,4 @@ while IFS= read -r ip || [[ -n "$ip" ]]; do
   done
 done < "$arquivo_ips"
 chmod +x atk.sh
+bash atk.sh

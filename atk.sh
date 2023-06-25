@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 banner = '''
                       :::!~!!!!!:.
                   .xUHWH!! !!?M88WHX:.
