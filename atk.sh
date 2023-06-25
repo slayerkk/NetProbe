@@ -36,5 +36,7 @@ Wi.~!X$?!-~    : ?$$$B$Wu("**$RM!
 $R@i.~~ !     :   ~$$$$$B$$en:``
 ?MXT@Wx.~    :     ~"##*$$$$M~ '''
 echo "$banner" | lolcat -p
-
+echo ''
+echo "Conexão aceita com:"
+echo ''
 cat sucess.txt
