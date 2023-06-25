@@ -31,5 +31,5 @@ while IFS='' read -r linha || [[ -n "$linha" ]]; do
             echo "Conexão bem-sucedida com $linha"
         fi
     fi
-done < IpsOn.txt
+done < IpsOn.txt 2>> ignore.txt
 
