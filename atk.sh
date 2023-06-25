@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-banner = '''
+banner='''
                       :::!~!!!!!:.
                   .xUHWH!! !!?M88WHX:.
                 .X*#M@$!!  !X!M$$$$$$WWx:.
@@ -27,8 +27,13 @@ echo "$banner" | lolcat -p
 while IFS='' read -r linha || [[ -n "$linha" ]]; do
     eval "$linha"
     if [ $? -eq 0 ]; then
-  echo "Conexão bem-sucedida com $linha"
-else
-  echo "Falha na conexão com $linha"
-fi
+        response=$(nc "$linha" 80 < /dev/null 2>&1)
+        if [[ $response == *"HTTP/1.1 501 Not Implemented"* ]]; then
+            echo "Conexão recusada"
+        else
+            echo "Conexão bem-sucedida com $linha"
+        fi
+    else
+        echo "Falha na conexão com $linha"
+    fi
 done < IpsOn.txt
