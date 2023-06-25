@@ -1,5 +1,6 @@
 import os, time, socket, subprocess, re
 # Códigos de cores do texto
+os.system('clear')
 nulo = "\033[0m"
 negrito = "\033[1m"
 sublinhado = "\033[4m"
@@ -53,5 +54,5 @@ ips_encontrados = re.findall(padrao_ip, saida)
 # Armazenar os IPs no arquivo
 with open(arquivo_saida, "w") as f:
     f.write("\n".join(ips_encontrados))
-
+os.system('chmod +x scan.sh')
 os.system('bash scan.sh')

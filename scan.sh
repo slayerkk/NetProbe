@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 banner='''
 ______________¶¶¶
 _____________¶¶_¶¶¶¶
@@ -42,11 +42,13 @@ top_portas="80 443 22 21 3389 23 25 53 110 143"
 
 while IFS= read -r ip || [[ -n "$ip" ]]; do
   for porta in $top_portas; do
-    if nc -zv "$ip" "$porta" >/dev/null 2>&1; then
+    if nc -zv -w2 "$ip" "$porta" >/dev/null 2>&1; then
       echo -e "\e[32m •\e[0m IP $ip, Porta $porta"
       echo "nc $ip $porta" >> "IpsOn.txt"
     else
       echo -e "\e[31m •\e[0m $ip"
+      break
     fi
   done
 done < "$arquivo_ips"
+chmod +x atk.sh
