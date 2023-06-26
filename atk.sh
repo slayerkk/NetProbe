@@ -39,4 +39,4 @@ echo "$banner" | lolcat -p
 echo ''
 echo "Conexão aceita com:"
 echo ''
-cat sucess.txt
+sed 's/nc//g' IpsOn.txt
