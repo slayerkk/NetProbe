@@ -5,7 +5,7 @@
 
 
 <div align="center">
-<img src="https://cdn.discordapp.com/attachments/1122305724194771056/1122610962839650466/image.png" width="715px" />
+<img src="https://cdn.discordapp.com/attachments/1000154460808556675/1131837225064206377/image.png" width="715px" />
 </div>
 
 <div align="center">
