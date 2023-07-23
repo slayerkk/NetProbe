@@ -53,14 +53,15 @@ bye='''
 ╚██████╔╝╚█████╔╝╚█████╔╝██████╔╝  ██████╦╝░░░██║░░░███████╗██╗██╗██╗─████───█
 ░╚═════╝░░╚════╝░░╚════╝░╚═════╝░  ╚═════╝░░░░╚═╝░░░╚══════╝╚═╝╚═╝╚═╝─▀▀▀▀▀▀▀'''
 if [[ "$resposta" == [Ss] ]]; then
+    clear
     echo "$atk" | lolcat -p
     while IFS='' read -r linha || [[ -n "$linha" ]]; do
-        nc -w2 "${linha}" 80 < /dev/null 2>&1 >/dev/null
-        if [ $? -eq 0 ]; then
-            echo "Conexão estabelecida com o IP: ${linha}"
-        else
-            echo "Falha ao conectar com o IP: ${linha}"
-        fi
+    if nc -w2 "${linha}" 80 < /dev/null 2>/dev/null; then
+        echo "Conexão estabelecida com o IP: ${linha}"
+    else
+        ip="${linha#nc }"
+        echo "Falha ao conectar com o IP: ${ip}"
+    fi
     done < IpsOn.txt
 else
     clear
