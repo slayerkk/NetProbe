@@ -38,7 +38,7 @@ ____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
 echo "$banner" | lolcat -p
 
 arquivo_ips="ips.txt"
-top_portas="21 22 23 25 53 80 110 135 139 143 179 443 445 514 587 631 993 995 1723 3306 3389 5900 8000 8080 8443 8888 9100 9999 10000 49152"
+top_portas="8080 443 22 21 3389 23 25 53 110 143"
 
 while IFS= read -r ip || [[ -n "$ip" ]]; do
   for porta in $top_portas; do
