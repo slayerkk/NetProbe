@@ -40,3 +40,31 @@ echo ''
 echo "Conexão aceita com:"
 echo ''
 sed 's/nc//g' IpsOn.txt
+echo "Deseja enviar um pedido de conexão para os IPs? (S/N): "
+read resposta
+
+atk=$(cat atk.txt)
+bye='''
+                                                                     ▄───▄
+░██████╗░░█████╗░░█████╗░██████╗░  ██████╗░██╗░░░██╗███████╗░░░░░░░░░█▀█▀█
+██╔════╝░██╔══██╗██╔══██╗██╔══██╗  ██╔══██╗╚██╗░██╔╝██╔════╝░░░░░░░░░█▄█▄█
+██║░░██╗░██║░░██║██║░░██║██║░░██║  ██████╦╝░╚████╔╝░█████╗░░░░░░░░░░░─███──▄▄
+██║░░╚██╗██║░░██║██║░░██║██║░░██║  ██╔══██╗░░╚██╔╝░░██╔══╝░░░░░░░░░░░─████▐█─█
+╚██████╔╝╚█████╔╝╚█████╔╝██████╔╝  ██████╦╝░░░██║░░░███████╗██╗██╗██╗─████───█
+░╚═════╝░░╚════╝░░╚════╝░╚═════╝░  ╚═════╝░░░░╚═╝░░░╚══════╝╚═╝╚═╝╚═╝─▀▀▀▀▀▀▀'''
+if [[ "$resposta" == [Ss] ]]; then
+    echo "$atk" | lolcat -p
+    while IFS='' read -r linha || [[ -n "$linha" ]]; do
+        nc -w2 "${linha}" 80 < /dev/null 2>&1 >/dev/null
+        if [ $? -eq 0 ]; then
+            echo "Conexão estabelecida com o IP: ${linha}"
+        else
+            echo "Falha ao conectar com o IP: ${linha}"
+        fi
+    done < IpsOn.txt
+else
+    clear
+    echo "$bye" | lolcat -p
+    sleep 5
+    clear
+fi
